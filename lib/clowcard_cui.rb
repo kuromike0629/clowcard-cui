@@ -1,5 +1,6 @@
 require "clowcard_cui/version"
+require "clowcard_cui/cli"
 
 module ClowcardCui
-  # Your code goes here...
+
 end
