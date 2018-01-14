@@ -3,7 +3,7 @@ require "thor"
 require "docker-api"
 
 module ClowcardCui
-  class CLI < Thor
+  class Cli < Thor
     desc "analysis", "analysis malware : [tagname] [malware_path] [execute time]"
 
     def analysis(name,malware_path,seconds)
