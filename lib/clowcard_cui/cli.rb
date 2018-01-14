@@ -18,10 +18,11 @@ module ClowcardCui
         @pol.import()
         #todo:ここでTOMOYOLinuxのポリシーに実行するマルウェアのdomainを追加する.
         @base_domain_name = '<kernel> /sbin/init /usr/bin/dockerd /usr/bin/docker-containerd /usr/bin/docker-containerd-shim /usr/bin/docker-runc /proc/self/exe'
-        @new_domain_name = @base_domain_name + ' /' + File.basename(malware_path)
+        @new_domain_name = @base_domain_name + '/' + File.basename(malware_path)
         @pol.add_domain(@new_domain_name)
         @pol.set_profile(@new_domain_name,1)
         @pol.apply
+
         #実行
         @container = @malware_image.run('/'+File.basename(malware_path))
         sleep(seconds.to_i)
@@ -34,9 +35,15 @@ module ClowcardCui
           @container.delete
         end
         @malware_image.remove(:force => true)
-
+        @container.delete(:force => true)
         #TomoyoLinuxの後処理
-        
+        r = @pol.get_domain_tree(@new_domain_name)
+        r.each do |d|
+          print d.to_s
+        end
+        @pol.remove_domains(@new_domain_name)
+        @pol.apply
+
       else
         p "file is not exist"
       end
