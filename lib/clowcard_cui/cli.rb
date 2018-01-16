@@ -1,6 +1,7 @@
 require "clowcard_cui"
 require "thor"
 require "docker-api"
+require "tomoyo_linux_ruby"
 
 module ClowcardCui
   class Cli < Thor
