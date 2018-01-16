@@ -37,6 +37,7 @@ module ClowCardCui
         end
         @malware_image.remove(:force => true)
         #TomoyoLinuxの後処理
+        @pol.import
         r = @pol.get_domain_tree(@new_domain_name)
         r.each do |d|
           print d.to_s
