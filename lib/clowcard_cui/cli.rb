@@ -44,7 +44,7 @@ module ClowCardCui
         r.each do |d|
           print d.to_s
         end
-        #@pol_after.remove_domains(@new_domain_name)
+        @pol_after.remove_domains(@new_domain_name)
         @pol_after.apply
 
       else
