@@ -31,12 +31,11 @@ module ClowCardCui
         #後処理
         if @container.info['State'] == 'running' then
           @container.kill
-          @container.delete
+          @container.delete(:force => true)
         else
-          @container.delete
+          @container.delete(:force => true)
         end
         @malware_image.remove(:force => true)
-        @container.delete(:force => true)
         #TomoyoLinuxの後処理
         r = @pol.get_domain_tree(@new_domain_name)
         r.each do |d|
