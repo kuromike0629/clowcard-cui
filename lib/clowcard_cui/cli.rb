@@ -36,14 +36,17 @@ module ClowCardCui
           @container.delete(:force => true)
         end
         @malware_image.remove(:force => true)
+
         #TomoyoLinuxの後処理
-        @pol.import()
-        r = @pol.get_domain_tree(@new_domain_name)
-        r.each do |d|
-          print d.to_s
-        end
-        @pol.remove_domains(@new_domain_name)
-        @pol.apply
+        #@pol.import()
+
+        #r = @pol.get_domain_tree(@new_domain_name)
+        #r.each do |d|
+        #  print d.to_s
+        #end
+
+        #@pol.remove_domains(@new_domain_name)
+        #@pol.apply
 
       else
         p "file is not exist"
