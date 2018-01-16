@@ -23,7 +23,7 @@ module ClowCardCui
         @pol.add_domain(@new_domain_name)
         @pol.set_profile(@new_domain_name,1)
         @pol.apply
-
+        sleep(3)
         #実行
         @container = @malware_image.run('/'+File.basename(malware_path))
         sleep(seconds.to_i)
@@ -36,6 +36,7 @@ module ClowCardCui
           @container.delete(:force => true)
         end
         @malware_image.remove(:force => true)
+
         #TomoyoLinuxの後処理
         @pol.import()
         r = @pol.get_domain_tree(@new_domain_name)
