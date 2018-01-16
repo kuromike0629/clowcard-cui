@@ -2,4 +2,4 @@
 
 require 'clowcard_cui'
 
-ClowcardCui::Cli.start
+ClowCardCui::Cli.start

@@ -3,7 +3,7 @@ require "thor"
 require "docker-api"
 require "tomoyo_linux_ruby"
 
-module ClowcardCui
+module ClowCardCui
   class Cli < Thor
     desc "analysis", "analysis malware : [tagname] [malware_path] [execute time]"
 
