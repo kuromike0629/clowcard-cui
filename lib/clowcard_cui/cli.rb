@@ -23,7 +23,7 @@ module ClowCardCui
         @pol.add_domain(@new_domain_name)
         @pol.set_profile(@new_domain_name,1)
         @pol.apply
-        sleep(3)
+        sleep(1)
         #実行
         @container = @malware_image.run('/'+File.basename(malware_path))
         sleep(seconds.to_i)
