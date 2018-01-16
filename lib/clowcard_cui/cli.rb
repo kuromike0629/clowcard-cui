@@ -19,7 +19,7 @@ module ClowCardCui
         @pol.import()
         #todo:ここでTOMOYOLinuxのポリシーに実行するマルウェアのdomainを追加する.
         @base_domain_name = '<kernel> /sbin/init /usr/bin/dockerd /usr/bin/docker-containerd /usr/bin/docker-containerd-shim /usr/bin/docker-runc /proc/self/exe'
-        @new_domain_name = @base_domain_name + '/' + File.basename(malware_path)
+        @new_domain_name = @base_domain_name + ' /' + File.basename(malware_path)
         @pol.add_domain(@new_domain_name)
         @pol.set_profile(@new_domain_name,1)
         @pol.apply
