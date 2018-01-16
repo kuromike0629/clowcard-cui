@@ -10,13 +10,13 @@ module ClowCardCui
     def analysis(name,malware_path,seconds)
       if File.exist?(malware_path) then
         #準備
-        print "Creating a malware image..."
+        print "Creating a malware image...\n"
         @malware_image = Docker::Image.create('fromImage' => 'ubuntu:16.04')
         @malware_image = @malware_image.insert_local('localPath' => malware_path, 'outputPath' => '/')
         @malware_image.tag('repo'=>name,'force'=>true)
 
         #TOMOYOLinuxの前処理
-        print "Adding new policy for the malware..."
+        print "Adding new policy for the malware...\n"
         @pol = TomoyoLinuxRuby::TomoyoPolicy.new("kernel")
         @pol.import()
         #todo:ここでTOMOYOLinuxのポリシーに実行するマルウェアのdomainを追加する.
@@ -27,12 +27,12 @@ module ClowCardCui
         @pol.apply
         sleep(1)
         #実行
-        print "Executing malware container..."
+        print "Executing malware container...\n"
         @container = @malware_image.run('/'+File.basename(malware_path))
         sleep(seconds.to_i)
 
         #後処理
-        print "Removing malware ..."
+        print "Removing malware ...\n"
         if @container.info['State'] == 'running' then
           @container.kill
           @container.delete(:force => true)
@@ -42,7 +42,7 @@ module ClowCardCui
         @malware_image.remove(:force => true)
 
         #TomoyoLinuxの後処理
-        print "Analysing malware..."
+        print "Analysing malware...\n"
         @pol_after = TomoyoLinuxRuby::TomoyoPolicy.new("kernel")
         @pol_after.import()
         r = @pol_after.get_domain_tree(@new_domain_name)
