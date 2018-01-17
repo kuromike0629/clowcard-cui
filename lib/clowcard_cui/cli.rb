@@ -5,9 +5,9 @@ require "tomoyo_linux_ruby"
 
 module ClowCardCui
   class Cli < Thor
-    desc "analysis", "analysis malware : [tagname] [malware_path] [execute time]"
+    desc "analysis", "analysis malware : [tagname] [malware_path] [execute time] [Output filepath]"
 
-    def analysis(name,malware_path,seconds)
+    def analysis(name,malware_path,seconds,output)
       if File.exist?(malware_path) then
         #準備
         print "Creating a malware image...\n"
@@ -45,8 +45,10 @@ module ClowCardCui
         @pol_after = TomoyoLinuxRuby::TomoyoPolicy.new("kernel")
         @pol_after.import
         r = @pol_after.get_domain_tree(@new_domain_name)
-        r.each do |d|
-          print d.to_s
+        File.open(output,"a") do |f|
+          r.each do |d|
+             f.puts d.to_s
+          end
         end
         @pol_after.remove_domains(@new_domain_name)
         @pol_after.apply
