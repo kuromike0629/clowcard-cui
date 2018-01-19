@@ -1,6 +1,6 @@
 # ClowCardCUI
 
-ClowCard is "Container type Linux malWare Cretical Analysing tools powerd by tomoyolinux,Ruby and Docker".
+ClowCard is "Container type Linux prOgram and malWare Cretical Analysing tools powerd by tomoyolinux,Ruby and Docker".
 
 ## Installation
 
