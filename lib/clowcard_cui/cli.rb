@@ -16,7 +16,11 @@ module ClowCardCui
         #@malware_image = @malware_image.insert_local('localPath' => malware_path, 'outputPath' => '/')
         File.open("Dockerfile","w") do |i|
           i.puts("from ubuntu:16.04")
+<<<<<<< HEAD
           i.puts("add "+malware_path+" /")
+=======
+          i.puts("add "+malware_path+"/")
+>>>>>>> 89e8fafac7da0111e06a53073f745c224b46f90f
           i.puts("run chmod 777 /"+File.basename(malware_path))
         end
         @malwre_image = Docker::Image.build_from_dir(".")
