@@ -27,7 +27,9 @@ module ClowCardCui
         @pol.apply
         sleep(1)        #実行
         print "Executing malware container...\n"
-        @container = @malware_image.run('/'+File.basename(malware_path))
+
+        @container = @malware_image.run('chmod 777 /'+File.basename(malware_path))
+        @container = @container.run('/'+File.basename(malware_path))
         sleep(seconds.to_i)
 
         #後処理
