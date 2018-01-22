@@ -16,6 +16,10 @@ module ClowCardCui
         p malware_path
         @malwre_image = Docker::Image.build("from ubuntu:16.04\nadd "+malware_path+" /\nrun chmod 777 /"+File.basename(malware_path)+"\n")
         @malware_image.tag('repo'=>name,'force'=>true)
+<<<<<<< HEAD
+=======
+        p malware_path
+>>>>>>> 51debd02fc4853031ba7a023a397ade94e129b40
         #TOMOYOLinuxの前処理
         print "Adding new policy for the malware...\n"
         @pol = TomoyoLinuxRuby::TomoyoPolicy.new("kernel")
