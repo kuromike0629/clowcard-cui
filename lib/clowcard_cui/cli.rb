@@ -2,7 +2,7 @@ require "clowcard_cui"
 require "thor"
 require "docker-api"
 require "tomoyo_linux_ruby"
-require "Fileutils"
+require 'fileutils'
 
 module ClowCardCui
   class Cli < Thor
