@@ -28,8 +28,8 @@ module ClowCardCui
         sleep(1)        #実行
         print "Executing malware container...\n"
 
-        @container = @malware_image.run('chmod 777 /'+File.basename(malware_path))
-        @container = @container.run('/'+File.basename(malware_path))
+        @container_permit = @malware_image.run('chmod 777 /'+File.basename(malware_path))
+        @container = @container_permit.run('/'+File.basename(malware_path))
         sleep(seconds.to_i)
 
         #後処理
@@ -39,6 +39,12 @@ module ClowCardCui
           @container.delete(:force => true)
         else
           @container.delete(:force => true)
+        end
+        if @container_permit.info['State'] == 'running' then
+          @container_permit.kill
+          @container_permit.delete(:force => true)
+        else
+          @container_permit.delete(:force => true)
         end
         @malware_image.remove(:force => true)
 
