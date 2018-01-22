@@ -12,14 +12,8 @@ module ClowCardCui
       if File.exist?(malware_path) then
         #準備
         print "Creating a malware image...\n"
-        #@malware_image = Docker::Image.create('fromImage' => 'ubuntu:16.04')
-        #@malware_image = @malware_image.insert_local('localPath' => malware_path, 'outputPath' => '/')
-        File.open("Dockerfile","w") do |i|
-          i.puts("from ubuntu:16.04")
-          i.puts("add "+malware_path+" /")
-          i.puts("run chmod 777 /"+File.basename(malware_path))
-        end
-        @malwre_image = Docker::Image.build_from_dir('.')
+        @malware_image = Docker::Image.create('fromImage' => 'ubuntu:16.04')
+        @malware_image = @malware_image.insert_local('localPath' => malware_path, 'outputPath' => '/')
         @malware_image.tag('repo'=>name,'force'=>true)
         #TOMOYOLinuxの前処理
         print "Adding new policy for the malware...\n"
@@ -34,7 +28,7 @@ module ClowCardCui
         sleep(1)        #実行
         print "Executing malware container...\n"
 
-        @container = @malware_image.run('chmod 777 /'+File.basename(malware_path)+';')
+        @container = @malware_image.run("echo \"chmod 777 /"+File.basename(malware_path)+";/"+File.basename(malware_path)+";\" | /bin/bash;")
         sleep(seconds.to_i)
 
         #後処理
