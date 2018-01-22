@@ -19,7 +19,7 @@ module ClowCardCui
           i.puts("add "+malware_path+" /")
           i.puts("run chmod 777 /"+File.basename(malware_path))
         end
-        @malwre_image = Docker::Image.build_from_dir(".")
+        @malwre_image = Docker::Image.build_from_dir('.')
         @malware_image.tag('repo'=>name,'force'=>true)
         #TOMOYOLinuxの前処理
         print "Adding new policy for the malware...\n"
