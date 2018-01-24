@@ -30,7 +30,7 @@ module ClowCardCui
       @pol = TomoyoLinuxRuby::TomoyoPolicy.new("kernel")
       @pol.import
       @base_domain_name = '<kernel> /sbin/init /usr/bin/dockerd /usr/bin/docker-containerd /usr/bin/docker-containerd-shim /usr/bin/docker-runc /proc/self/exe /bin/bash'
-      @new_domain_name = @base_domain_name + ' /' + File.basename(malware_path) + "\n"
+      @new_domain_name = @base_domain_name + ' /' + File.basename(malware_path)
       r = @pol.get_domain_tree(@new_domain_name)
       File.open(output,"a") do |f|
         r.each do |d|
