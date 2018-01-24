@@ -36,6 +36,7 @@ module ClowCardCui
         r.each do |d|
            f.puts d.to_s
         end
+        f.puts "\n"
       end
       @pol.remove_domains(@new_domain_name)
       @pol.apply
