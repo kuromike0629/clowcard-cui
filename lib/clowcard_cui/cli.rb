@@ -30,7 +30,7 @@ module ClowCardCui
       @pol = TomoyoLinuxRuby::TomoyoPolicy.new("kernel")
       @pol.import
       #todo:ここでTOMOYOLinuxのポリシーに実行するマルウェアのdomainを追加する.
-      @base_domain_name = '<kernel> /sbin/init /usr/bin/dockerd /usr/bin/docker-containerd /usr/bin/docker-containerd-shim /usr/bin/docker-runc /proc/self/exe /bin/bash'
+      @base_domain_name = '<kernel> /usr/bin/dbus-daemon /usr/lib/gnome-terminal/gnome-terminal-server /bin/bash'
       @new_domain_name = @base_domain_name + ' /' + File.basename(malware_path) + "\n"
       @pol.add_domain(@new_domain_name)
       @pol.set_profile(@new_domain_name,1)
@@ -58,7 +58,7 @@ module ClowCardCui
     def tomoyo_stop_learning_bare(malware_path,output)
       @pol = TomoyoLinuxRuby::TomoyoPolicy.new("kernel")
       @pol.import
-      @base_domain_name = '<kernel> /sbin/init /usr/bin/dockerd /usr/bin/docker-containerd /usr/bin/docker-containerd-shim /usr/bin/docker-runc /proc/self/exe /bin/bash'
+      @base_domain_name = '<kernel> /usr/bin/dbus-daemon /usr/lib/gnome-terminal/gnome-terminal-server /bin/bash'
       @new_domain_name = @base_domain_name + ' /' + File.basename(malware_path)
       r = @pol.get_domain_tree(@new_domain_name)
       File.open(output,"a") do |f|
