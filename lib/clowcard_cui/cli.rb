@@ -59,7 +59,7 @@ module ClowCardCui
       @pol = TomoyoLinuxRuby::TomoyoPolicy.new("kernel")
       @pol.import
       @base_domain_name = '<kernel> /usr/bin/dbus-daemon /usr/lib/gnome-terminal/gnome-terminal-server /bin/bash'
-      @new_domain_name = @base_domain_name + ' ' + malware_path
+      @new_domain_name = @base_domain_name + ' ' + malware_path.chomp
       r = @pol.get_domain_tree(@new_domain_name)
       File.open(output,"a") do |f|
         r.each do |d|
